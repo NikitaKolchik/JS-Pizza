@@ -33,9 +33,39 @@ function getIngredientsArray(pizza) {
             <div class="description">
                 <%= getIngredientsArray(pizza).join(", ") %>
             </div>
-        </div>
+            <div class="info">
+            <% if(pizza.hasSmallSize) { %>
+                <img src="assets/images/size-icon.svg" class="size-small"><%= pizza.small_size.size %><% } %><br>
+            <% if(pizza.hasSmallSize) { %>
+                <img src="assets/images/weight.svg" class="weight-small"><%= pizza.small_size.weight %><% } %><br>
+            <% if(pizza.hasSmallSize) { %>
+                <span class="price-small"><%= pizza.small_size.price %></span><% } %><br>
+            <% if(pizza.hasSmallSize) { %>
+                 <button class="btn btn-warning buy-small">Купити малу</button><br>
+                <% } %>
 
-        <!-- Перед тим щоб показати кнопку необхідно переконатися, що піца має великий розмір -->
-        <button class="btn btn-primary buy-big">Купити велику</button>
+            </div>
+
+            <div class="info">
+            <% if(pizza.hasBigSize) { %>
+            <img src="assets/images/size-icon.svg" class="size-big"><%= pizza.big_size.size %><% } %><br>
+
+
+            <% if(pizza.hasBigSize) { %>
+                <img src="assets/images/weight.svg" class="weight-big"><%= pizza.big_size.weight %><% } %><br>
+
+            <% if(pizza.hasBigSize) { %>
+                <span class="price-big"><%= pizza.big_size.price %></span><% } %> <br>
+
+            <% if(pizza.hasBigSize) { %>
+                <button class="btn btn-warning buy-big">Купити велику</button><br>
+                <% } %>
+            </div>
+
+
+
+
+
+        </div>
     </div>
 </div>

@@ -26,7 +26,9 @@ var pizza_info = [
             price: 169
         },
         is_new:true,
-        is_popular:true
+        is_popular:true,
+        hasBigSize:true,
+        hasSmallSize:true
 
     },
     {
@@ -50,7 +52,9 @@ var pizza_info = [
             size: 40,
             price: 199
         },
-        is_popular:true
+        is_popular:true,
+        hasBigSize:true,
+        hasSmallSize:true
     },
     {
         id:3,
@@ -58,7 +62,7 @@ var pizza_info = [
         title: "Міксовий поло",
         type: 'М’ясна піца',
         content: {
-            meat: ['вітчина', 'куриця копчена'],
+            meat: ['шинка', 'куриця копчена'],
             cheese: ['сир моцарелла'],
             pineapple: ['ананаси'],
             additional: ['кукурудза', 'петрушка', 'соус томатний']
@@ -72,7 +76,9 @@ var pizza_info = [
             weight: 780,
             size: 40,
             price: 179
-        }
+        },
+        hasBigSize:true,
+        hasSmallSize:true
     },
     {
         id:4,
@@ -80,7 +86,7 @@ var pizza_info = [
         title: "Сициліано",
         type: 'М’ясна піца',
         content: {
-            meat: ['вітчина', 'салямі'],
+            meat: ['шинка', 'салямі'],
             cheese: ['сир моцарелла'],
             mushroom: ['шампінйони'],
             additional: ['перець болгарський',  'соус томатний']
@@ -94,7 +100,9 @@ var pizza_info = [
             weight: 790,
             size: 40,
             price: 169
-        }
+        },
+        hasBigSize:true,
+        hasSmallSize:true
     },
     {
         id:17,
@@ -110,7 +118,9 @@ var pizza_info = [
             weight: 370,
             size: 30,
             price: 89
-        }
+        },
+        hasBigSize:false,
+        hasSmallSize:true
     },
     {
         id:43,
@@ -133,7 +143,9 @@ var pizza_info = [
             weight: 780,
             size: 40,
             price: 180
-        }
+        },
+        hasBigSize:true,
+        hasSmallSize:true
     },
     {
         id:90,
@@ -149,7 +161,9 @@ var pizza_info = [
             weight: 845,
             size: 40,
             price: 399
-        }
+        },
+        hasBigSize:true,
+        hasSmallSize:false
     },
     {
         id:6,
@@ -170,7 +184,9 @@ var pizza_info = [
             weight: 700,
             size: 40,
             price: 299
-        }
+        },
+        hasBigSize:true,
+        hasSmallSize:true
     }
 ];
 

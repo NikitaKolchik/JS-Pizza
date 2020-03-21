@@ -20,10 +20,35 @@ function showPizzaList(list) {
 
         $node.find(".buy-big").click(function(){
             PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
+            $(".make-order").css("opacity","1");
+
+
         });
         $node.find(".buy-small").click(function(){
             PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
+            $(".make-order").css("opacity","1");
+
         });
+        $(".filter-meat").click(function () {
+                    filterPizza('М’ясна піца');
+        })
+        $(".filter-mushrooms").click(function () {
+                filterPizza('mushroom');
+        })
+        $(".filter-pineapple").click(function () {
+            filterPizza('pineapple');
+        })
+        $(".filter-seafood").click(function () {
+            filterPizza('ocean');
+        })
+        $(".filter-vegan").click(function () {
+            filterPizza('Вега піца');
+        })
+
+        $(".filter-all").click(function () {
+            filterPizza('all');
+        })
+
 
         $pizza_list.append($node);
     }
@@ -34,16 +59,32 @@ function showPizzaList(list) {
 function filterPizza(filter) {
     //Масив куди потраплять піци які треба показати
     var pizza_shown = [];
-
+    var pizza_shown_new = []
     Pizza_List.forEach(function(pizza){
         //Якщо піка відповідає фільтру
-        //pizza_shown.push(pizza);
+            if(pizza.type==filter){
 
-        //TODO: зробити фільтри
+                pizza_shown.push(pizza)
+            }
+            else if(pizza.content.mushroom && filter=='mushroom'){
+                pizza_shown.push(pizza);
+            }
+            else if(pizza.content.pineapple && filter=='pineapple'){
+                pizza_shown.push(pizza);
+            }
+            else if(pizza.content.ocean && filter=='ocean'){
+                pizza_shown.push(pizza);
+            }
+            else if(pizza.id && filter=='all'){
+                pizza_shown.push(pizza);
+            }
+
+
     });
 
     //Показати відфільтровані піци
     showPizzaList(pizza_shown);
+    pizza_shown=[]
 }
 
 function initialiseMenu() {

@@ -15,8 +15,39 @@
 
 </head>
 <body>
-<div id="cart"></div>
+<div class="black-block">
+    <div class="logo-container">
+        <h2>Pizza<br>KMA</h2>
+        <img src="assets/images/discount.svg" class = "discount-pic">
+    </div>
+
+    <div class="text-info">
+        <h3>(044)-666-66-66<span class="hours">24 години на тиждень</span><span class="free">Безкоштовна Доставка</span><button class="enter btn btn-warning"> Увійти</button></h3>
+        <hr>
+    </div>
+</div>
+<div class = "order-container">
+    <h1>Ваші замовлення</h1>
+    <div id="cart"></div>
+    <button class="btn btn-warning make-order">Купити</button>
+    <button class="clear-order">Очистити<br> замовлення</button>
+</div>
 <div class="container">
+
+    <div class="filter-pizza">
+        <h1>Усі піци<br></h1>
+        <ul class="nav nav-pills">
+            <li><a href="#" class = "active choose-type filter-all">Усі </a></li>
+            <li><a href="#"  class="choose-type filter-meat">М'ясні </a></li>
+            <li><a href="#"  class="choose-type filter-pineapple">З ананасом </a></li>
+            <li><a href="#"  class="choose-type filter-mushrooms">З грибами</a></li>
+            <li><a href="#"  class="choose-type filter-seafood">З морепродуктами</a></li>
+            <li><a href="#"  class="choose-type filter-vegan">Вега</a></li>
+        </ul>
+
+    </div>
+
+
     <div class="row" id="pizza_list">
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail pizza-card">
@@ -75,6 +106,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <!--Own JavaScript -->
-<!--<script type="text/javascript"  src="assets/js/main.js"> </script>-->
+<script type="text/javascript"  src="assets/js/main.js"> </script>
 </body>
 </html>

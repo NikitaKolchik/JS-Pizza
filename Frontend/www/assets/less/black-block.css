@@ -1,0 +1,58 @@
+.black-block {
+  position: relative;
+  left: 15px;
+  height: 90px;
+  width: 98%;
+  background: #333333;
+  border-top: 0;
+}
+.black-block .logo-container {
+  position: relative;
+  left: 17px;
+  background: #ed8240;
+  height: 90px;
+  width: 100px;
+}
+.black-block .logo-container h2 {
+  color: #f0efef;
+  margin: 0;
+  text-align: center;
+}
+.black-block .discount-pic {
+  position: relative;
+  transform: rotate(180deg);
+  top: 18px;
+}
+.black-block .text-info {
+  color: lightgrey;
+  position: absolute;
+  left: 200px;
+  top: 5px;
+}
+.black-block .text-info h3 {
+  margin-top: 0;
+}
+.black-block .text-info h3 .hours {
+  position: relative;
+  font-size: 15px;
+  left: 50px;
+}
+.black-block .text-info h3 .free {
+  position: relative;
+  font-size: 15px;
+  left: 100px;
+}
+.black-block .text-info h3 hr {
+  background: #DADADA;
+}
+.black-block .text-info h3 .enter {
+  position: relative;
+  background: #fe9801;
+  left: 400px;
+  color: white;
+  border: 0;
+  font-size: 15px;
+  border-radius: 10px;
+  margin: 2px 2px;
+}
+/*# sourceMappingURL=black-block.css.map */
