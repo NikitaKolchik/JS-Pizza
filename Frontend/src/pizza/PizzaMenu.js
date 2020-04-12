@@ -5,8 +5,11 @@ var Templates = require('../Templates');
 var PizzaCart = require('./PizzaCart');
 var Pizza_List = require('../Pizza_List');
 
+
+
 //HTML едемент куди будуть додаватися піци
 var $pizza_list = $("#pizza_list");
+let itemsArray = [];
 
 function showPizzaList(list) {
     //Очищаємо старі піци в кошику
@@ -17,15 +20,23 @@ function showPizzaList(list) {
         var html_code = Templates.PizzaMenu_OneItem({pizza: pizza});
 
         var $node = $(html_code);
+        total = $("#total")
 
         $node.find(".buy-big").click(function(){
             PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
+            total.text(parseInt(total.text()) + pizza.big_size.price);
             $(".make-order").css("opacity","1");
+
+
+            itemsArray.push(pizza)
 
 
         });
         $node.find(".buy-small").click(function(){
             PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
+            total.text(parseInt(total.text()) + pizza.small_size.price);
+            itemsArray.push(pizza)
+
             $(".make-order").css("opacity","1");
 
         });
@@ -59,7 +70,6 @@ function showPizzaList(list) {
 function filterPizza(filter) {
     //Масив куди потраплять піци які треба показати
     var pizza_shown = [];
-    var pizza_shown_new = []
     Pizza_List.forEach(function(pizza){
         //Якщо піка відповідає фільтру
             if(pizza.type==filter){

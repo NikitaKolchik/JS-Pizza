@@ -2,13 +2,15 @@
 
 <div class="cart">
 
-    <span class="list-name"><%= pizza.title %></span>
+    <span class="list-name"><%= pizza.title%></span>
     <% if(size==='small_size') {%>
     <span class="list-name"> (МАЛА) </span>
     <%} else if(size==='big_size') {%>
         <span class="list-name"> (ВЕЛИКА) </span>
     <%}%>
-    <div>Ціна: <%= pizza[size].price %> грн.</div>
+
+    <%  var itemprice =pizza[size].price*parseInt(quantity) ; %>
+    <div>Ціна <%= itemprice  %> грн.</div>
     <div class="order">
         <div class="gabarits">
         <img src="assets/images/weight.svg"><%=pizza[size].weight%>
@@ -20,7 +22,11 @@
         <button class="btn btn-success plus">+</button>
         <button class="btn remove"><span class = "glyphicon glyphicon-remove"></span></button>
         <div class="cart-pizza-img">
-        <img src=<%=pizza.icon%>>
+        <img src=<%=pizza.icon%>
+
+
+            %> грн.</span>
+
         </div>
     </div>
     <hr>
