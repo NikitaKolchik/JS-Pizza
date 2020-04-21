@@ -1,82 +1,15 @@
 const API = require('../api.js');
-const PizzaCart = require('./PizzaCart');
-let map = window.map;
+const Cart = require('./PizzaCart');
+var $cart = $('#cart');
 
-function initialize() {
-    var point = new google.maps.LatLng(50.464379, 30.519131);
-    var marker = new google.maps.Marker({
-        position: point,
-//map	- це змінна карти створена за допомогою new google.maps.Map(...)
-        map: map,
-        icon: "assets/images/map-icon.png"
-    });
 
-    google.maps.event.addListener(map,
-        'click', function (me) {
-            let coordinates = me.latLng;
-            console.log(coordinates);
-            calculateRoute({lat: 50.464379, lng: 30.519131}, coordinates, function (err, time) {
-                if (!err) {
-//Дізналися час
-                    $(".shipping-time").text(time.duration.text);
-                } else {
-                    console.log("Немає маршруту")
-                }
-            });
-            geocodeLatLng(coordinates, function (err, adress) {
-                if (!err) {
-//Дізналися адресу
-                    $(".shipping-address").text(adress);
-                    $("#inputAddress").val(adress);
-                } else {
-                    console.log("Немає адреси")
-                }
-            })
-        });
-}
+var  private_key = 'sandbox_5r6nidnKyIkNgzINYwlKUdtieOkHfGJvoo42praT'
+var public_key = 'sandbox_i50705553059'
 
-function geocodeLatLng(latlng, callback) {
-//Модуль за роботу з адресою
-    let geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'location': latlng}, function (results, status) {
-        if (status === google.maps.GeocoderStatus.OK && results[1]) {
-            let address = results[1].formatted_address;
-            callback(null, address);
-        } else {
-            callback(new Error("Can't find adress"));
-        }
-    });
-}
 
-var directionsDisplay;
 
-function calculateRoute(A_latlng, B_latlng, callback) {
-    if (directionsDisplay != null) {
-        directionsDisplay.setMap(null);
-        directionsDisplay = null;
-    }
-    directionsDisplay = new google.maps.DirectionsRenderer();
-    var directionService = new google.maps.DirectionsService();
-    directionService.route({
-        origin: A_latlng,
-        destination: B_latlng,
-        travelMode: google.maps.TravelMode["DRIVING"]
-    }, function (response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-            var leg = response.routes[0].legs[0];
-            callback(null, {
-                duration: leg.duration
-            });
-        } else {
-            callback(new Error("Can'	not	find	direction"));
-        }
-    });
-    directionsDisplay.setMap(map);
-}
 
-exports.initialiseMaps = initialize;
-exports.checkData = function () {
+function checkData() {
     let validNum = false,
         validName = false,
         validAddress = false;
@@ -128,7 +61,42 @@ exports.checkData = function () {
         }
     });
     $('.accept-button').click(function () {
-        alert("dfsljkdslkjdsflkf")
+        $('#liqpay').css('display', 'block');
+        var name = $('input.name').val();
+        var address = $('input.address').val();
+        var number = $('input.phone').val();
+        var orders = JSON.parse(localStorage.getItem('cart'))
+        var pizza = [];
+        var name_pizza;
+        var count;
+        var price = 0;
+        var current_price;
+
+        for (var i = 0; i < orders.length; i++) {
+            name_pizza = orders[i].pizza.title;
+            if (orders[i].size === 'big_size') {
+                size = 'Велика';
+            } else {
+                size = 'Мала';
+            }
+            count = orders[i].quantity;
+            current_price = orders[i].price;
+            var pizza_info = {
+                name_pizza: name_pizza,
+                size: size,
+                quantity: count,
+                price: current_price
+            };
+            price += orders[i].price;
+            pizza.push(pizza_info);
+        }
+        var order_info = {
+            name: name,
+            address: address,
+            phone: number,
+            pizza: pizza,
+            price: price
+        };
         if (!validName)
             $("#inputName").removeClass('is-invalid').addClass('is-invalid');
         if (!validNum)
@@ -139,20 +107,34 @@ exports.checkData = function () {
             alert('Введіть валідні данні')
 
         else {
-            try {
-                let order = JSON.parse(localStorage.getItem('cart'));
-                console.log(order);
-                API.createOrder(order, function (err, data) {
-                    if (err)
-                        alert('Error');
-                    else {
-                        alert('Замовлення створенно');
-                        localStorage.clear();
-                    }
-                });
-            } catch (e) {
-                alert('Error-2');
-            }
+
+            API.createOrder(order_info, function (err, data) {
+                if (!err) {
+                    LiqPayCheckout.init({
+                        data: data.data,
+                        signature: data.signature,
+                        embedTo: "#liqpay",
+                        mode: "embed",
+                    }).on("liqpay.callback", function(data){
+                        console.log(data.status);
+                        console.log(data);
+                        alert('Оплата пройшла успішно. Очікуйте доставку.');
+                       // $('.contact-form').css('display', 'block');
+                        $('#map').css('display', 'block');
+
+                    }).on("liqpay.ready", function(data){
+                    }).on("liqpay.close", function(data){
+                    });
+                }
+
+                else {
+                    alert('Неправильно введені дані!');
+                }
+            });
+
+
         }
     });
 }
+
+exports.checkData = checkData

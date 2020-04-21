@@ -8,8 +8,13 @@ $(function(){
     var PizzaCart = require('./pizza/PizzaCart');
     var Pizza_List = require('./Pizza_List');
 
+    var orderData = require('./pizza/orderData');
+
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
+
+   // orderData.initialiseMaps();
+    orderData.checkData();
 
 
 });
